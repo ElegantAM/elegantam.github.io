@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Your Brain is Lying to You</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
+
+:root {
+  --ink: #080810;
+  --text: #E8E8F4;
+  --muted: #66667A;
+  --surface: #111118;
+  --card: #18181F;
+  --border: rgba(255,255,255,0.07);
+  --accent: #7C3AED;
+  --accent2: #EC4899;
+  --green: #10B981;
+  --gold: #F59E0B;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--text);font-family:'Space Grotesk',sans-serif;line-height:1.6;overflow-x:hidden}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(124,58,237,0.15) 0%,transparent 60%);pointer-events:none}
+.hero-label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:20px;opacity:.8}
+h1{font-family:'Instrument Serif',serif;font-size:clamp(36px,9vw,72px);line-height:1.05;letter-spacing:-1.5px;color:var(--text);margin-bottom:16px}
+h1 em{font-style:italic;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:16px;color:var(--muted);max-width:480px;margin:0 auto 36px;line-height:1.7}
+.scroll-hint{font-size:12px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:8px;animation:bounce 2s infinite}
+.scroll-arrow{font-size:20px}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* EXPERIMENT CARDS */
+.experiment{padding:80px 24px;max-width:700px;margin:0 auto;border-top:1px solid var(--border)}
+.exp-num{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+.exp-title{font-family:'Instrument Serif',serif;font-size:clamp(26px,6vw,40px);font-style:italic;color:var(--text);margin-bottom:8px;line-height:1.2}
+.exp-desc{font-size:14px;color:var(--muted);margin-bottom:32px;line-height:1.7;max-width:560px}
+
+/* === EXPERIMENT 1: THE DRESS === */
+.dress-container{position:relative;border-radius:20px;overflow:hidden;margin-bottom:24px;background:var(--card);border:1px solid var(--border)}
+.dress-visual{width:100%;height:360px;display:flex;align-items:center;justify-content:center;position:relative;transition:filter 1.2s ease}
+.dress-svg{width:160px;height:280px;transition:all 1.2s ease}
+
+.vote-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.vote-btn{padding:16px;border-radius:12px;border:2px solid transparent;cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;transition:.3s;position:relative;overflow:hidden}
+.vote-btn.blue-black{background:rgba(30,40,80,0.5);border-color:rgba(60,80,160,0.4);color:#8899EE}
+.vote-btn.white-gold{background:rgba(80,70,20,0.3);border-color:rgba(200,160,40,0.4);color:#D4A820}
+.vote-btn:hover{transform:translateY(-2px);border-color:currentColor}
+.vote-btn.selected{transform:translateY(-2px)}
+.vote-btn.blue-black.selected{background:rgba(30,40,120,0.7);border-color:#5566DD;box-shadow:0 0 20px rgba(85,102,221,0.3)}
+.vote-btn.white-gold.selected{background:rgba(100,80,10,0.6);border-color:#D4A820;box-shadow:0 0 20px rgba(212,168,32,0.3)}
+
+.result-reveal{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;display:none;animation:fadeUp .4s ease}
+.result-reveal.show{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.result-title{font-weight:700;color:var(--text);margin-bottom:8px;font-size:15px}
+.result-body{font-size:13px;color:var(--muted);line-height:1.7}
+.result-body strong{color:var(--text)}
+
+.lighting-demo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.light-box{border-radius:10px;padding:14px;text-align:center}
+.light-box.warm{background:linear-gradient(135deg,#3A2800,#5A3A00);border:1px solid #7A5A00}
+.light-box.cool{background:linear-gradient(135deg,#001830,#002A50);border:1px solid #004080}
+.light-box-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
+.light-box.warm .light-box-title{color:#D4A820}
+.light-box.cool .light-box-title{color:#6699EE}
+.light-box-text{font-size:11px;color:var(--muted);line-height:1.5}
+.dress-mini{display:flex;gap:4px;justify-content:center;margin-bottom:8px}
+.swatch{width:20px;height:20px;border-radius:4px}
+
+/* === EXPERIMENT 2: CHECKER SHADOW === */
+.checker-wrap{position:relative;margin-bottom:24px;border-radius:16px;overflow:hidden;background:var(--card);border:1px solid var(--border);padding:24px}
+.checker-board{display:grid;grid-template-columns:repeat(8,1fr);gap:0;width:280px;margin:0 auto 20px;border-radius:8px;overflow:hidden;position:relative}
+.checker-cell{aspect-ratio:1;position:relative;transition:all .8s ease}
+.checker-reveal-btn{display:block;width:100%;padding:12px;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);border-radius:10px;color:var(--accent);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;cursor:pointer;transition:.3s;margin-bottom:16px}
+.checker-reveal-btn:hover{background:rgba(124,58,237,0.25)}
+.checker-explanation{font-size:13px;color:var(--muted);line-height:1.7;display:none}
+.checker-explanation.show{display:block;animation:fadeUp .4s ease}
+.same-color-proof{display:flex;align-items:center;gap:12px;margin-top:14px;padding:14px;background:var(--surface);border-radius:10px;border:1px solid var(--border)}
+.proof-swatch{width:48px;height:48px;border-radius:8px;flex-shrink:0}
+.proof-text{font-size:12px;color:var(--muted);line-height:1.5}
+.proof-text strong{color:var(--text)}
+
+/* === EXPERIMENT 3: SPINNING DANCER === */
+.dancer-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:24px}
+.dancer-stage{width:200px;height:280px;margin:0 auto 20px;position:relative;overflow:hidden;border-radius:16px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.dancer-figure{width:80px;height:200px;position:relative;animation:spin 3s linear infinite;transform-style:preserve-3d}
+.dancer-body{position:absolute;left:50%;transform:translateX(-50%);background:var(--text);border-radius:4px}
+.dancer-head{width:30px;height:30px;border-radius:50%;background:var(--text);top:0;left:50%;transform:translateX(-50%)}
+.dancer-torso{width:24px;height:60px;top:30px;left:50%;transform:translateX(-50%)}
+.dancer-leg1{width:10px;height:70px;top:90px;left:calc(50% - 12px);transform-origin:top center;animation:leg1 3s linear infinite}
+.dancer-leg2{width:10px;height:70px;top:90px;left:calc(50% + 2px);transform-origin:top center;animation:leg2 3s linear infinite}
+.dancer-arm1{width:8px;height:50px;top:35px;left:calc(50% - 22px);transform-origin:top center;border-radius:4px;animation:arm1 3s linear infinite}
+.dancer-arm2{width:8px;height:50px;top:35px;left:calc(50% + 14px);transform-origin:top center;border-radius:4px;animation:arm2 3s linear infinite}
+
+@keyframes spin{
+  0%{transform:rotateY(0deg)}
+  100%{transform:rotateY(360deg)}
+}
+@keyframes leg1{
+  0%,100%{transform:rotate(20deg)}
+  50%{transform:rotate(-30deg)}
+}
+@keyframes leg2{
+  0%,100%{transform:rotate(-20deg)}
+  50%{transform:rotate(30deg)}
+}
+@keyframes arm1{
+  0%,100%{transform:rotate(-30deg)}
+  50%{transform:rotate(30deg)}
+}
+@keyframes arm2{
+  0%,100%{transform:rotate(30deg)}
+  50%{transform:rotate(-30deg)}
+}
+
+.direction-vote{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:320px;margin-bottom:16px}
+.dir-btn{padding:14px;border-radius:10px;border:2px solid var(--border);background:var(--card);cursor:pointer;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13px;color:var(--muted);transition:.3s;text-align:center}
+.dir-btn:hover{border-color:var(--accent);color:var(--accent)}
+.dir-btn.selected.cw{border-color:#10B981;color:#10B981;background:rgba(16,185,129,0.1)}
+.dir-btn.selected.ccw{border-color:#EC4899;color:#EC4899;background:rgba(236,72,153,0.1)}
+
+/* === EXPERIMENT 4: COLOUR CONSTANCY === */
+.colour-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.colour-panel{border-radius:14px;overflow:hidden;border:1px solid var(--border);cursor:pointer;transition:.3s;position:relative}
+.colour-panel:hover{transform:scale(1.02)}
+.colour-inner{height:140px;display:flex;align-items:center;justify-content:center}
+.colour-label{padding:10px 14px;background:var(--card);font-size:12px;font-weight:600}
+.color-circle{width:60px;height:60px;border-radius:50%;box-shadow:0 0 0 4px rgba(255,255,255,0.1)}
+
+/* === VOTE BARS === */
+.vote-stats{margin-top:12px}
+.vote-stat-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.vote-stat-label{font-size:11px;font-weight:600;min-width:80px}
+.vote-bar-bg{flex:1;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden}
+.vote-bar-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.vote-stat-pct{font-size:11px;color:var(--muted);min-width:36px;text-align:right}
+
+/* MIND BLOWN SECTION */
+.mind-blown{background:linear-gradient(135deg,rgba(124,58,237,0.12),rgba(236,72,153,0.08));border:1px solid rgba(124,58,237,0.2);border-radius:20px;padding:32px 24px;text-align:center;margin:0 24px 80px;max-width:652px;margin-left:auto;margin-right:auto}
+.mb-title{font-family:'Instrument Serif',serif;font-size:28px;font-style:italic;color:var(--text);margin-bottom:12px}
+.mb-text{font-size:14px;color:var(--muted);line-height:1.8;max-width:480px;margin:0 auto 20px}
+.mb-quote{font-family:'Instrument Serif',serif;font-size:20px;font-style:italic;color:var(--accent);line-height:1.5}
+
+/* SHARE */
+.share-bar{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:24px}
+.share-btn{padding:10px 20px;border-radius:8px;font-weight:600;font-size:13px;text-decoration:none;border:none;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:.2s}
+.share-wa{background:#25D366;color:#fff}
+.share-wa:hover{background:#20bd5a}
+.share-copy{background:var(--card);color:var(--muted);border:1px solid var(--border)}
+.share-copy:hover{color:var(--text);border-color:var(--accent)}
+
+@media(max-width:480px){
+  .vote-row,.direction-vote,.colour-grid,.lighting-demo{grid-template-columns:1fr}
+  .checker-board{width:240px}
+  .dress-visual{height:280px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">A neuroscience experience</div>
+  <h1>Your brain is<br><em>lying to you.</em></h1>
+  <p class="hero-sub">4 interactive experiments that prove your perception of reality is a controlled hallucination — built by your brain, not the world.</p>
+  <div class="scroll-hint">
+    <span style="font-size:12px;color:var(--muted)">Scroll to begin</span>
+    <span class="scroll-arrow">↓</span>
+  </div>
+</section>
+
+<!-- EXPERIMENT 1: THE DRESS -->
+<section class="experiment">
+  <div class="exp-num">Experiment 01</div>
+  <div class="exp-title">The Dress That Broke the Internet</div>
+  <div class="exp-desc">In 2015, one photo split the world in two. Same image. Same pixels. Completely different realities. What do you see?</div>
+
+  <div class="dress-container">
+    <div class="dress-visual" id="dressVisual">
+      <svg class="dress-svg" id="dressSvg" viewBox="0 0 160 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Dress shape -->
+        <path d="M55 40 Q50 20 50 10 L110 10 Q110 20 105 40 L120 80 Q140 120 145 160 L145 270 Q120 278 80 278 Q40 278 15 270 L15 160 Q20 120 40 80 Z" fill="#1a1a5e" stroke="#2233aa" stroke-width="1.5"/>
+        <!-- Lace strips -->
+        <path d="M40 80 L120 80" stroke="#8899dd" stroke-width="3" stroke-dasharray="4,3"/>
+        <path d="M35 100 L125 100" stroke="#8899dd" stroke-width="2" stroke-dasharray="3,3"/>
+        <path d="M30 120 L130 120" stroke="#8899dd" stroke-width="2" stroke-dasharray="3,3"/>
+        <path d="M25 140 L135 140" stroke="#8899dd" stroke-width="2" stroke-dasharray="3,3"/>
+        <path d="M20 160 L140 160" stroke="#8899dd" stroke-width="2" stroke-dasharray="3,3"/>
+        <path d="M18 180 L142 180" stroke="#8899dd" stroke-width="2" stroke-dasharray="3,3"/>
+        <path d="M16 200 L144 200" stroke="#8899dd" stroke-width="2" stroke-dasharray="3,3"/>
+        <path d="M15 220 L145 220" stroke="#8899dd" stroke-width="2" stroke-dasharray="3,3"/>
+        <path d="M15 240 L145 240" stroke="#8899dd" stroke-width="2" stroke-dasharray="3,3"/>
+        <!-- Shoulder straps -->
+        <path d="M55 40 Q58 25 65 15 L80 12 L95 15 Q102 25 105 40" stroke="#2233aa" stroke-width="2" fill="none"/>
+        <!-- Highlight -->
+        <path d="M65 50 Q80 45 95 50 Q85 70 80 80 Q75 70 65 50Z" fill="rgba(150,170,255,0.08)"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="vote-row">
+    <button class="vote-btn blue-black" onclick="voteDress('blue-black')">
+      🔵⚫ Blue & Black
+    </button>
+    <button class="vote-btn white-gold" onclick="voteDress('white-gold')">
+      ⚪🟡 White & Gold
+    </button>
+  </div>
+
+  <div class="vote-stats" id="dressStats" style="display:none">
+    <div class="vote-stat-row">
+      <div class="vote-stat-label" style="color:#8899EE">🔵 Blue/Black</div>
+      <div class="vote-bar-bg"><div class="vote-bar-fill" id="bbBar" style="width:0%;background:#5566DD"></div></div>
+      <div class="vote-stat-pct" id="bbPct">57%</div>
+    </div>
+    <div class="vote-stat-row">
+      <div class="vote-stat-label" style="color:#D4A820">⚪ White/Gold</div>
+      <div class="vote-bar-bg"><div class="vote-bar-fill" id="wgBar" style="width:0%;background:#D4A820"></div></div>
+      <div class="vote-stat-pct" id="wgPct">43%</div>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:6px">Based on 10M+ global responses</div>
+  </div>
+
+  <div class="result-reveal" id="dressResult">
+    <div class="result-title">Why this happens 🧠</div>
+    <div class="result-body">
+      Your brain constantly tries to <strong>subtract the lighting</strong> from what it sees to find the "true" color of an object. This is called <strong>color constancy.</strong><br><br>
+      The dress photo has ambiguous lighting — it could be in shadow (cool light) or in sunshine (warm light). Your brain <strong>makes a guess</strong> based on your personal visual history — then locks in. That guess becomes your reality.
+    </div>
+    <div class="lighting-demo">
+      <div class="light-box warm">
+        <div class="dress-mini">
+          <div class="swatch" style="background:#F5F0DC"></div>
+          <div class="swatch" style="background:#C8A800"></div>
+        </div>
+        <div class="light-box-title">☀️ Warm light assumed</div>
+        <div class="light-box-text">Brain subtracts yellow → sees White & Gold</div>
+      </div>
+      <div class="light-box cool">
+        <div class="dress-mini">
+          <div class="swatch" style="background:#1a1a6e"></div>
+          <div class="swatch" style="background:#111111"></div>
+        </div>
+        <div class="light-box-title">🌙 Cool light assumed</div>
+        <div class="light-box-text">Brain subtracts blue → sees Blue & Black</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIMENT 2: CHECKER SHADOW -->
+<section class="experiment">
+  <div class="exp-num">Experiment 02</div>
+  <div class="exp-title">Two squares. Same colour. Your eyes refuse to believe it.</div>
+  <div class="exp-desc">Square A looks dark. Square B looks light. They are the exact same shade of grey. This is the most famous optical illusion in neuroscience — created by MIT professor Edward Adelson.</div>
+
+  <div class="checker-wrap">
+    <div class="checker-board" id="checkerBoard"></div>
+    <button class="checker-reveal-btn" id="checkerBtn" onclick="revealChecker()">
+      👁️ Reveal the truth — connect A and B
+    </button>
+    <div class="checker-explanation" id="checkerExp">
+      <div class="same-color-proof">
+        <div class="proof-swatch" style="background:#787878"></div>
+        <div class="proof-text">
+          <strong>Both squares are #787878</strong><br>
+          Identical RGB values. Your brain sees them as different because it <strong>computes brightness relative to neighbors</strong> — not absolutely. The shadow tells your brain "B must be lighter than it appears." So it brightens B in your perception.
+        </div>
+      </div>
+      <div style="margin-top:14px;font-size:13px;color:var(--muted);line-height:1.7">
+        This is not a flaw — it's a feature. In nature, this trick helps you identify objects correctly under different lighting. Your brain is so confident in this computation that even when you <strong>know</strong> they're the same, you still can't see it.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIMENT 3: LEFT OR RIGHT -->
+<section class="experiment">
+  <div class="exp-num">Experiment 03</div>
+  <div class="exp-title">Clockwise or counter-clockwise?</div>
+  <div class="exp-desc">Watch the figure below. Which direction is it spinning? Your answer reveals which brain hemisphere is dominant right now — and you can switch it.</div>
+
+  <div class="dancer-wrap">
+    <div class="dancer-stage">
+      <div class="dancer-figure" id="dancer">
+        <div class="dancer-body dancer-head"></div>
+        <div class="dancer-body dancer-torso"></div>
+        <div class="dancer-body dancer-leg1"></div>
+        <div class="dancer-body dancer-leg2"></div>
+        <div class="dancer-body dancer-arm1"></div>
+        <div class="dancer-body dancer-arm2"></div>
+      </div>
+    </div>
+    <div class="direction-vote">
+      <button class="dir-btn cw" onclick="voteSpin('cw')">↻ Clockwise</button>
+      <button class="dir-btn ccw" onclick="voteSpin('ccw')">↺ Counter-clockwise</button>
+    </div>
+    <div class="result-reveal" id="spinResult">
+      <div class="result-title" id="spinTitle"></div>
+      <div class="result-body" id="spinBody"></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIMENT 4: COLOUR CONSTANCY -->
+<section class="experiment">
+  <div class="exp-num">Experiment 04</div>
+  <div class="exp-title">Which circle is darker?</div>
+  <div class="exp-desc">Tap the panel that contains the darker orange circle. Trust your eyes completely.</div>
+
+  <div class="colour-grid">
+    <div class="colour-panel" onclick="voteColour('A')">
+      <div class="colour-inner" style="background:#1a1a1a">
+        <div class="color-circle" style="background:#FF8C00"></div>
+      </div>
+      <div class="colour-label" style="color:var(--muted)">Panel A</div>
+    </div>
+    <div class="colour-panel" onclick="voteColour('B')">
+      <div class="colour-inner" style="background:#DDDDDD">
+        <div class="color-circle" style="background:#FF8C00"></div>
+      </div>
+      <div class="colour-label" style="color:var(--muted)">Panel B</div>
+    </div>
+  </div>
+
+  <div class="result-reveal" id="colourResult">
+    <div class="result-title">They are <em>identical</em> — both #FF8C00 🧠</div>
+    <div class="result-body">
+      Against a dark background, orange looks <strong>lighter and brighter.</strong> Against a grey background, the same orange looks <strong>darker and more saturated.</strong><br><br>
+      Your brain doesn't measure color — it <strong>compares</strong> it. Always relative to surroundings. This is why interior designers say "never judge a paint color on a chip — always see it on the wall."
+    </div>
+  </div>
+</section>
+
+<!-- MIND BLOWN -->
+<div class="mind-blown">
+  <div class="mb-title">What does this mean for you?</div>
+  <div class="mb-text">Every person you've ever disagreed with wasn't seeing the same reality as you. Not because they were stupid or wrong — but because their brain built a different model from the same world. Arguments aren't about facts. They're about <strong style="color:var(--text)">colliding maps.</strong></div>
+  <div class="mb-quote">"The eye sees only what the mind is prepared to comprehend."<br><span style="font-size:14px;color:var(--muted);font-style:normal">— Robertson Davies</span></div>
+  <div class="share-bar">
+    <a class="share-btn share-wa" href="https://wa.me/?text=This%20interactive%20experiment%20proves%20your%20brain%20is%20lying%20to%20you%20%F0%9F%A4%AF%20-%20sahayak-pro.netlify.app" target="_blank">💬 Share on WhatsApp</a>
+    <button class="share-btn share-copy" onclick="copyLink()">🔗 Copy Link</button>
+  </div>
+</div>
+
+<script>
+// ── DRESS EXPERIMENT ──
+let dressVoted = false;
+function voteDress(choice) {
+  if (dressVoted) return;
+  dressVoted = true;
+  document.querySelectorAll('.vote-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelector(`.vote-btn.${choice}`).classList.add('selected');
+  document.getElementById('dressStats').style.display = 'block';
+  setTimeout(() => {
+    document.getElementById('bbBar').style.width = '57%';
+    document.getElementById('wgBar').style.width = '43%';
+  }, 100);
+  document.getElementById('dressResult').classList.add('show');
+  // Animate dress colour shift
+  const svg = document.getElementById('dressSvg');
+  if (choice === 'white-gold') {
+    svg.style.filter = 'brightness(2.2) sepia(0.6) hue-rotate(5deg) saturate(1.5)';
+    document.getElementById('dressVisual').style.background = 'linear-gradient(135deg,#2A1A00,#1A1000)';
+  } else {
+    svg.style.filter = 'brightness(0.7) hue-rotate(220deg) saturate(1.8)';
+    document.getElementById('dressVisual').style.background = 'linear-gradient(135deg,#000510,#000020)';
+  }
+}
+
+// ── CHECKER EXPERIMENT ──
+const DARK = '#555555', LIGHT = '#AAAAAA', SAME = '#787878';
+let checkerRevealed = false;
+const A_pos = 42, B_pos = 21; // cell indices
+
+function buildChecker() {
+  const board = document.getElementById('checkerBoard');
+  for (let i = 0; i < 64; i++) {
+    const row = Math.floor(i / 8), col = i % 8;
+    const cell = document.createElement('div');
+    cell.className = 'checker-cell';
+    cell.id = 'cell-' + i;
+    let color = (row + col) % 2 === 0 ? LIGHT : DARK;
+    if (i === A_pos) color = DARK;
+    if (i === B_pos) color = LIGHT;
+    // Simulate shadow over middle columns
+    if (col >= 2 && col <= 5 && row >= 2 && row <= 6) {
+      color = (row + col) % 2 === 0
+        ? `rgba(${hexToRgb(LIGHT)},0.55)`
+        : `rgba(${hexToRgb(DARK)},0.55)`;
+      if (i === B_pos) color = '#787878';
+    }
+    cell.style.background = color;
+    cell.style.minHeight = '35px';
+    // Labels
+    if (i === A_pos) {
+      const label = document.createElement('div');
+      label.textContent = 'A';
+      label.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-weight:800;font-size:13px;color:white;text-shadow:0 1px 3px rgba(0,0,0,0.8);pointer-events:none';
+      cell.style.position = 'relative';
+      cell.appendChild(label);
+    }
+    if (i === B_pos) {
+      const label = document.createElement('div');
+      label.textContent = 'B';
+      label.style.cssText = 'position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-weight:800;font-size:13px;color:white;text-shadow:0 1px 3px rgba(0,0,0,0.8);pointer-events:none';
+      cell.style.position = 'relative';
+      cell.appendChild(label);
+    }
+    board.appendChild(cell);
+  }
+}
+
+function hexToRgb(hex) {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
+
+function revealChecker() {
+  if (checkerRevealed) return;
+  checkerRevealed = true;
+  // Make A and B same color
+  document.getElementById('cell-' + A_pos).style.background = SAME;
+  document.getElementById('cell-' + B_pos).style.background = SAME;
+  document.getElementById('checkerBtn').textContent = '✅ A and B are now the same — #787878';
+  document.getElementById('checkerBtn').style.background = 'rgba(16,185,129,0.1)';
+  document.getElementById('checkerBtn').style.borderColor = 'rgba(16,185,129,0.3)';
+  document.getElementById('checkerBtn').style.color = '#10B981';
+  document.getElementById('checkerExp').classList.add('show');
+}
+
+// ── SPIN EXPERIMENT ──
+let spinVoted = false;
+function voteSpin(dir) {
+  if (spinVoted) return;
+  spinVoted = true;
+  document.querySelectorAll('.dir-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelector(`.dir-btn.${dir}`).classList.add('selected');
+  const result = document.getElementById('spinResult');
+  const title = document.getElementById('spinTitle');
+  const body = document.getElementById('spinBody');
+  if (dir === 'cw') {
+    title.textContent = '↻ Clockwise — Right brain dominant right now';
+    body.innerHTML = `You're currently in a more <strong>creative, intuitive, holistic</strong> thinking mode. Right-brain activity processes the figure as spinning clockwise.<br><br>
+    <strong>Try this:</strong> Stare at the floor for 5 seconds, then look back. Some people can flip the direction. The figure has no true direction — your brain assigns one.`;
+  } else {
+    title.textContent = '↺ Counter-clockwise — Left brain dominant right now';
+    body.innerHTML = `You're in a more <strong>analytical, logical, sequential</strong> thinking mode right now. Left-brain activity processes the figure as counter-clockwise.<br><br>
+    <strong>Try this:</strong> Look away and think of something creative — a song, a story. Look back. The direction may have flipped.`;
+  }
+  result.classList.add('show');
+}
+
+// ── COLOUR EXPERIMENT ──
+let colourVoted = false;
+function voteColour(panel) {
+  if (colourVoted) return;
+  colourVoted = true;
+  document.getElementById('colourResult').classList.add('show');
+}
+
+// ── SHARE ──
+function copyLink() {
+  navigator.clipboard.writeText('sahayak-pro.netlify.app').then(() => {
+    const btn = document.querySelector('.share-copy');
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '🔗 Copy Link', 2000);
+  });
+}
+
+// Init
+buildChecker();
+</script>
+</body>
+</html>

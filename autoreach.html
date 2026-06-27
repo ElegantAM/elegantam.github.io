@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sahayak Growth System — India's #1 Digital Sales Engine</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
+:root{
+  --ink:#07070F;--text:#EEEEF8;--muted:#666680;--surface:#10101A;
+  --card:#18181F;--card2:#1E1E28;--border:rgba(255,255,255,0.07);
+  --orange:#FF6B00;--orange2:#FF8C2A;--green:#00C896;--gold:#FFB800;
+  --blue:#3B82F6;--pink:#EC4899;--purple:#7C3AED;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:14px;line-height:1.6;overflow-x:hidden}
+
+/* ── TICKER ── */
+.ticker-wrap{background:linear-gradient(90deg,var(--orange),#FF8C2A);padding:8px 0;overflow:hidden;position:sticky;top:0;z-index:200}
+.ticker{display:flex;white-space:nowrap;animation:tick 30s linear infinite}
+.ticker span{padding:0 28px;font-size:11px;font-weight:700;color:#fff;letter-spacing:.5px}
+.ticker span::before{content:"💰 "}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── NAV ── */
+nav{background:rgba(7,7,15,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:33px;z-index:100}
+.nav-logo{font-family:'Instrument Serif',serif;font-size:18px;font-style:italic;color:var(--text)}
+.nav-logo b{color:var(--orange);font-style:normal}
+.nav-tabs{display:flex;gap:4px}
+.ntab{padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;transition:.2s}
+.ntab.active,.ntab:hover{background:rgba(255,107,0,.15);color:var(--orange)}
+
+/* ── HERO ── */
+.hero{padding:64px 20px 48px;text-align:center;max-width:780px;margin:0 auto;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(255,107,0,.13) 0%,transparent 65%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,107,0,.1);border:1px solid rgba(255,107,0,.28);color:var(--orange);padding:5px 16px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:22px}
+.pulse{width:7px;height:7px;background:var(--orange);border-radius:50%;animation:pulse 1.4s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+h1{font-family:'Instrument Serif',serif;font-size:clamp(34px,8vw,60px);line-height:1.05;letter-spacing:-1.5px;margin-bottom:16px}
+h1 em{font-style:italic;color:var(--orange)}
+.hero-sub{font-size:15px;color:var(--muted);max-width:520px;margin:0 auto 36px;line-height:1.7}
+.hero-metrics{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.hm{text-align:center;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:12px;min-width:100px}
+.hm-num{font-family:'Instrument Serif',serif;font-size:28px;color:var(--orange)}
+.hm-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
+
+/* ── SECTION ── */
+.section{padding:56px 20px;max-width:900px;margin:0 auto}
+.sec-badge{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);margin-bottom:10px}
+.sec-title{font-family:'Instrument Serif',serif;font-size:clamp(24px,5vw,36px);font-style:italic;color:var(--text);margin-bottom:8px;line-height:1.2}
+.sec-sub{font-size:13px;color:var(--muted);margin-bottom:32px;max-width:560px;line-height:1.7}
+
+/* ── FUNNEL ── */
+.funnel{display:flex;flex-direction:column;gap:0;max-width:580px;margin:0 auto 32px}
+.funnel-step{position:relative;padding:18px 24px;text-align:center;margin:0 auto;transition:.3s;cursor:pointer}
+.funnel-step:hover .fs-inner{transform:scale(1.02)}
+.fs-inner{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 20px;transition:.2s}
+.funnel-step.f1{width:100%}
+.funnel-step.f2{width:88%}
+.funnel-step.f3{width:76%}
+.funnel-step.f4{width:64%}
+.funnel-step.f5{width:52%}
+.funnel-step.f6{width:40%}
+.fs-num{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.fs-title{font-weight:700;font-size:14px;color:var(--text);margin-bottom:4px}
+.fs-desc{font-size:11px;color:var(--muted)}
+.fs-metric{font-size:11px;font-weight:700;margin-top:6px}
+.funnel-arrow{text-align:center;color:var(--muted);font-size:18px;line-height:1;margin:2px 0}
+
+/* ── STRATEGY CARDS ── */
+.strat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:32px}
+.strat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;transition:.25s;cursor:pointer;position:relative;overflow:hidden}
+.strat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;opacity:0;transition:.3s}
+.strat-card:hover{border-color:var(--orange);transform:translateY(-2px)}
+.strat-card:hover::before{opacity:1}
+.strat-card.orange::before{background:linear-gradient(90deg,var(--orange),var(--gold))}
+.strat-card.green::before{background:linear-gradient(90deg,var(--green),#00E5B0)}
+.strat-card.blue::before{background:linear-gradient(90deg,var(--blue),var(--purple))}
+.strat-card.pink::before{background:linear-gradient(90deg,var(--pink),var(--purple))}
+.strat-icon{font-size:28px;margin-bottom:12px}
+.strat-name{font-weight:700;font-size:15px;margin-bottom:6px;color:var(--text)}
+.strat-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.strat-result{font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;display:inline-block}
+.strat-card.orange .strat-result{background:rgba(255,107,0,.12);color:var(--orange)}
+.strat-card.green .strat-result{background:rgba(0,200,150,.12);color:var(--green)}
+.strat-card.blue .strat-result{background:rgba(59,130,246,.12);color:var(--blue)}
+.strat-card.pink .strat-result{background:rgba(236,72,153,.12);color:var(--pink)}
+
+/* ── CONTENT CALENDAR ── */
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:16px}
+.cal-day{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 6px;text-align:center}
+.cal-day-name{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.cal-task{font-size:10px;color:var(--text);line-height:1.4;margin-bottom:4px}
+.cal-tag{display:inline-block;font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;margin-top:2px}
+.tag-wa{background:rgba(37,211,102,.15);color:#25D366}
+.tag-ig{background:rgba(236,72,153,.15);color:var(--pink)}
+.tag-yt{background:rgba(255,0,0,.15);color:#FF4444}
+.tag-em{background:rgba(59,130,246,.15);color:var(--blue)}
+.tag-qu{background:rgba(255,184,0,.15);color:var(--gold)}
+
+/* ── WHATSAPP SCRIPTS ── */
+.script-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;margin-bottom:14px;position:relative}
+.script-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.script-body{font-size:13px;color:var(--text);line-height:1.8;white-space:pre-wrap;background:var(--surface);padding:14px;border-radius:8px;border:1px solid var(--border);margin-bottom:10px;font-family:monospace}
+.copy-btn{padding:7px 16px;background:rgba(0,200,150,.12);border:1px solid rgba(0,200,150,.25);border-radius:6px;color:var(--green);font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:11px;cursor:pointer;transition:.2s}
+.copy-btn:hover{background:rgba(0,200,150,.22)}
+.copy-btn.copied{background:rgba(0,200,150,.3);color:#00E5B0}
+
+/* ── REVENUE CALCULATOR ── */
+.calc-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;margin-bottom:24px}
+.calc-title{font-weight:700;font-size:15px;margin-bottom:20px;color:var(--text)}
+.calc-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.calc-input-wrap{display:flex;flex-direction:column;gap:6px}
+.calc-label{font-size:11px;color:var(--muted);font-weight:600}
+.calc-input{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:600;outline:none;transition:.2s;width:100%}
+.calc-input:focus{border-color:var(--orange)}
+.calc-result{background:linear-gradient(135deg,rgba(255,107,0,.12),rgba(255,184,0,.08));border:1px solid rgba(255,107,0,.2);border-radius:12px;padding:20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:16px}
+.cr-item{text-align:center}
+.cr-num{font-family:'Instrument Serif',serif;font-size:26px;color:var(--orange)}
+.cr-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+
+/* ── PLATFORM STRATEGY ── */
+.platform-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.platform-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;transition:.2s}
+.platform-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.15)}
+.platform-icon{font-size:24px;margin-bottom:8px}
+.platform-name{font-weight:700;font-size:13px;margin-bottom:4px}
+.platform-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+.platform-tactics{list-style:none;display:flex;flex-direction:column;gap:4px}
+.platform-tactics li{font-size:11px;color:#aaa;display:flex;align-items:flex-start;gap:6px}
+.platform-tactics li::before{content:'→';color:var(--orange);flex-shrink:0}
+
+/* ── OBJECTION HANDLER ── */
+.obj-grid{display:flex;flex-direction:column;gap:10px}
+.obj-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.obj-question{padding:14px 18px;font-weight:600;font-size:13px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:.2s}
+.obj-question:hover{background:rgba(255,255,255,.03)}
+.obj-q-text{color:var(--muted)}
+.obj-q-text::before{content:'"';color:var(--orange)}
+.obj-answer{display:none;padding:0 18px 14px;font-size:12px;color:#aaa;line-height:1.7;border-top:1px solid var(--border);padding-top:12px}
+.obj-answer strong{color:var(--text)}
+.obj-answer.open{display:block}
+.obj-arrow{color:var(--muted);transition:.3s;flex-shrink:0}
+.obj-card.open .obj-arrow{transform:rotate(180deg)}
+
+/* ── 90-DAY PLAN ── */
+.plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.plan-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;position:relative;overflow:hidden}
+.plan-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+.plan-card.m1::after{background:var(--orange)}
+.plan-card.m2::after{background:var(--gold)}
+.plan-card.m3::after{background:var(--green)}
+.plan-month{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.plan-card.m1 .plan-month{color:var(--orange)}
+.plan-card.m2 .plan-month{color:var(--gold)}
+.plan-card.m3 .plan-month{color:var(--green)}
+.plan-title{font-weight:700;font-size:15px;margin-bottom:12px;color:var(--text)}
+.plan-tasks{list-style:none;display:flex;flex-direction:column;gap:7px}
+.plan-tasks li{font-size:12px;color:#aaa;display:flex;align-items:flex-start;gap:8px;line-height:1.4}
+.plan-tasks li::before{content:'✓';font-weight:800;flex-shrink:0}
+.plan-card.m1 .plan-tasks li::before{color:var(--orange)}
+.plan-card.m2 .plan-tasks li::before{color:var(--gold)}
+.plan-card.m3 .plan-tasks li::before{color:var(--green)}
+.plan-target{margin-top:14px;padding:10px;border-radius:8px;text-align:center;font-weight:700;font-size:13px}
+.plan-card.m1 .plan-target{background:rgba(255,107,0,.1);color:var(--orange)}
+.plan-card.m2 .plan-target{background:rgba(255,184,0,.1);color:var(--gold)}
+.plan-card.m3 .plan-target{background:rgba(0,200,150,.1);color:var(--green)}
+
+/* ── VIRAL LOOP ── */
+.viral-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:28px;text-align:center;margin-bottom:32px}
+.viral-title{font-family:'Instrument Serif',serif;font-size:24px;font-style:italic;margin-bottom:20px}
+.viral-steps{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
+.vs{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:12px;font-weight:600;text-align:center;min-width:100px}
+.vs-icon{font-size:20px;margin-bottom:4px}
+.vs-arrow{color:var(--orange);font-size:18px;font-weight:700}
+
+/* ── FOOTER ── */
+footer{padding:32px 20px;border-top:1px solid var(--border);text-align:center}
+.footer-logo{font-family:'Instrument Serif',serif;font-size:20px;font-style:italic;margin-bottom:8px}
+.footer-logo b{color:var(--orange);font-style:normal}
+footer p{font-size:11px;color:var(--muted)}
+
+/* ── TABS CONTENT ── */
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* ── CHECKLIST ── */
+.checklist{display:flex;flex-direction:column;gap:8px}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:.2s}
+.check-item:hover{border-color:rgba(255,255,255,.12)}
+.check-item.done{background:rgba(0,200,150,.06);border-color:rgba(0,200,150,.2)}
+.check-box{width:20px;height:20px;border:2px solid var(--border);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.2s;margin-top:1px}
+.check-item.done .check-box{background:var(--green);border-color:var(--green)}
+.check-tick{display:none;color:#fff;font-size:11px;font-weight:800}
+.check-item.done .check-tick{display:block}
+.check-text{font-size:13px;color:var(--text);line-height:1.4}
+.check-item.done .check-text{color:var(--muted);text-decoration:line-through}
+.check-sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+@media(max-width:600px){
+  .cal-grid{grid-template-columns:repeat(4,1fr)}
+  .calc-row{grid-template-columns:1fr}
+  .nav-tabs{display:none}
+  .viral-steps{flex-direction:column}
+  .vs-arrow{transform:rotate(90deg)}
+  h1{font-size:32px}
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>Share on 10 WhatsApp groups today</span>
+    <span>Post 1 Reel = 500 free views</span>
+    <span>Email list of 1,000 = ₹50,000/month</span>
+    <span>Every buyer is a potential referral</span>
+    <span>Answer 3 Quora questions daily</span>
+    <span>Bundle products = 40% higher cart value</span>
+    <span>Share on 10 WhatsApp groups today</span>
+    <span>Post 1 Reel = 500 free views</span>
+    <span>Email list of 1,000 = ₹50,000/month</span>
+    <span>Every buyer is a potential referral</span>
+    <span>Answer 3 Quora questions daily</span>
+    <span>Bundle products = 40% higher cart value</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Sahayak <b>Growth System</b></div>
+  <div class="nav-tabs">
+    <button class="ntab active" onclick="showTab('funnel')">Funnel</button>
+    <button class="ntab" onclick="showTab('content')">Content</button>
+    <button class="ntab" onclick="showTab('scripts')">Scripts</button>
+    <button class="ntab" onclick="showTab('calculator')">Revenue</button>
+    <button class="ntab" onclick="showTab('plan')">90-Day Plan</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span class="pulse"></span>India's Complete Sales System</div>
+  <h1>From ₹0 to<br><em>₹1 Lakh/month</em><br>step by step.</h1>
+  <p class="hero-sub">Every script, strategy, platform tactic, content calendar and revenue calculator you need — built specifically for Sahayak and the Indian digital market.</p>
+  <div class="hero-metrics">
+    <div class="hm"><div class="hm-num">7</div><div class="hm-label">Channels</div></div>
+    <div class="hm"><div class="hm-num">30</div><div class="hm-label">Ready Scripts</div></div>
+    <div class="hm"><div class="hm-num">90</div><div class="hm-label">Day Plan</div></div>
+    <div class="hm"><div class="hm-num">₹1L</div><div class="hm-label">Target/Month</div></div>
+  </div>
+</section>
+
+<!-- ══════════════ TAB: FUNNEL ══════════════ -->
+<div class="tab-content active" id="tab-funnel">
+
+<section class="section" style="border-top:1px solid var(--border)">
+  <div class="sec-badge">The Master System</div>
+  <div class="sec-title">The Sahayak Sales Funnel</div>
+  <div class="sec-sub">Every rupee you earn online flows through this funnel. Optimise each stage and your revenue multiplies automatically.</div>
+
+  <div class="funnel">
+    <div class="funnel-step f1"><div class="fs-inner" style="border-color:rgba(255,107,0,.3)">
+      <div class="fs-num" style="color:var(--orange)">Stage 1 — Awareness</div>
+      <div class="fs-title">🌊 Traffic — Strangers find you</div>
+      <div class="fs-desc">WhatsApp groups · Instagram Reels · Quora · YouTube Shorts · Google Search</div>
+      <div class="fs-metric" style="color:var(--orange)">Target: 10,000 people/month see your content</div>
+    </div></div>
+    <div class="funnel-arrow">↓</div>
+
+    <div class="funnel-step f2"><div class="fs-inner" style="border-color:rgba(255,184,0,.3)">
+      <div class="fs-num" style="color:var(--gold)">Stage 2 — Interest</div>
+      <div class="fs-title">🎯 Hook — They click your link</div>
+      <div class="fs-desc">Brain experiment page · Legal cheatsheet · Free tools · Viral content</div>
+      <div class="fs-metric" style="color:var(--gold)">Target: 20% click through = 2,000 visitors</div>
+    </div></div>
+    <div class="funnel-arrow">↓</div>
+
+    <div class="funnel-step f3"><div class="fs-inner" style="border-color:rgba(59,130,246,.3)">
+      <div class="fs-num" style="color:var(--blue)">Stage 3 — Capture</div>
+      <div class="fs-title">📧 Email/WhatsApp — They join your list</div>
+      <div class="fs-desc">Free PDF lead magnet · Email gate · Exit popup · Google Form</div>
+      <div class="fs-metric" style="color:var(--blue)">Target: 30% opt-in = 600 subscribers</div>
+    </div></div>
+    <div class="funnel-arrow">↓</div>
+
+    <div class="funnel-step f4"><div class="fs-inner" style="border-color:rgba(124,58,237,.3)">
+      <div class="fs-num" style="color:var(--purple)">Stage 4 — Nurture</div>
+      <div class="fs-title">💌 Trust — You deliver value first</div>
+      <div class="fs-desc">Free PDF delivered · 3 value emails · WhatsApp broadcast · Helpful tips</div>
+      <div class="fs-metric" style="color:var(--purple)">Target: 5 touchpoints before first sale</div>
+    </div></div>
+    <div class="funnel-arrow">↓</div>
+
+    <div class="funnel-step f5"><div class="fs-inner" style="border-color:rgba(236,72,153,.3)">
+      <div class="fs-num" style="color:var(--pink)">Stage 5 — Convert</div>
+      <div class="fs-title">💳 Sale — They buy on Instamojo</div>
+      <div class="fs-desc">Scarcity offer · Bundle discount · WhatsApp close · UPI payment</div>
+      <div class="fs-metric" style="color:var(--pink)">Target: 10% buy = 60 sales × ₹200 avg = ₹12,000</div>
+    </div></div>
+    <div class="funnel-arrow">↓</div>
+
+    <div class="funnel-step f6"><div class="fs-inner" style="border-color:rgba(0,200,150,.3)">
+      <div class="fs-num" style="color:var(--green)">Stage 6 — Multiply</div>
+      <div class="fs-title">🔄 Refer — They bring more buyers</div>
+      <div class="fs-desc">Referral bonus · Reseller program · WhatsApp share incentive</div>
+      <div class="fs-metric" style="color:var(--green)">Target: Each buyer brings 1.5 more = viral loop</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- PLATFORM STRATEGY -->
+<section class="section" style="border-top:1px solid var(--border)">
+  <div class="sec-badge">7 Channels</div>
+  <div class="sec-title">Platform-by-Platform Strategy</div>
+  <div class="sec-sub">Each platform has a specific role. Don't try to do everything — master one at a time.</div>
+  <div class="platform-grid">
+    <div class="platform-card">
+      <div class="platform-icon">💬</div>
+      <div class="platform-name" style="color:#25D366">WhatsApp</div>
+      <div class="platform-desc">Your #1 sales channel. Highest conversion in India. Personal and direct.</div>
+      <ul class="platform-tactics">
+        <li>Join 20 relevant groups daily</li>
+        <li>Share value first, sell second</li>
+        <li>Build broadcast list of 500+</li>
+        <li>Send 3 messages/week max</li>
+        <li>Use voice notes for trust</li>
+      </ul>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">📸</div>
+      <div class="platform-name" style="color:var(--pink)">Instagram</div>
+      <div class="platform-desc">Brand awareness + discovery. Reels get 10x more reach than posts.</div>
+      <ul class="platform-tactics">
+        <li>1 Reel/day minimum</li>
+        <li>Use Hindi + English captions</li>
+        <li>Link in bio = sahayak-pro.netlify.app</li>
+        <li>Reply to every comment</li>
+        <li>Stories: behind the scenes</li>
+      </ul>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">🎥</div>
+      <div class="platform-name" style="color:#FF4444">YouTube Shorts</div>
+      <div class="platform-desc">Longest shelf life. A Short from today can get views for 2 years.</div>
+      <ul class="platform-tactics">
+        <li>60-second tips on legal rights</li>
+        <li>Consumer fraud stories</li>
+        <li>AI tool demos</li>
+        <li>Link in description always</li>
+        <li>3 Shorts/week minimum</li>
+      </ul>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">📝</div>
+      <div class="platform-name" style="color:var(--gold)">Quora</div>
+      <div class="platform-desc">Highest quality traffic in India. Buyers, not browsers.</div>
+      <ul class="platform-tactics">
+        <li>Answer 3 questions/day</li>
+        <li>Target: consumer rights, legal, JEE</li>
+        <li>End every answer with soft CTA</li>
+        <li>500+ word answers rank best</li>
+        <li>Add your store link naturally</li>
+      </ul>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">📧</div>
+      <div class="platform-name" style="color:var(--blue)">Email List</div>
+      <div class="platform-desc">The only audience you truly own. Worth ₹10/subscriber/month.</div>
+      <ul class="platform-tactics">
+        <li>Send 2 emails/week</li>
+        <li>80% value, 20% sales</li>
+        <li>Subject line = your headline</li>
+        <li>Always one clear CTA</li>
+        <li>Segment by interest</li>
+      </ul>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">🔴</div>
+      <div class="platform-name" style="color:#FF6600">Reddit India</div>
+      <div class="platform-desc">Tech-savvy, educated audience. Perfect for LexIndia Pro.</div>
+      <ul class="platform-tactics">
+        <li>r/india, r/LegalAdviceIndia</li>
+        <li>r/IndianStreetBets</li>
+        <li>Help first, promote never directly</li>
+        <li>Karma builds trust</li>
+        <li>Link in profile bio</li>
+      </ul>
+    </div>
+    <div class="platform-card">
+      <div class="platform-icon">🔗</div>
+      <div class="platform-name" style="color:var(--blue)">LinkedIn</div>
+      <div class="platform-desc">B2B sales. Small business owners need DigiSeva Pro.</div>
+      <ul class="platform-tactics">
+        <li>Post case studies weekly</li>
+        <li>Connect with SME owners</li>
+        <li>Share AI tool tips</li>
+        <li>DM strategy for B2B sales</li>
+        <li>Showcase results + testimonials</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- VIRAL LOOP -->
+<section class="section" style="border-top:1px solid var(--border)">
+  <div class="sec-badge">Growth Engine</div>
+  <div class="sec-title">The Viral Loop — Your Free Growth Machine</div>
+  <div class="viral-wrap">
+    <div class="viral-title">Every customer becomes a marketer</div>
+    <div class="viral-steps">
+      <div class="vs"><div class="vs-icon">👤</div>Stranger sees content</div>
+      <div class="vs-arrow">→</div>
+      <div class="vs"><div class="vs-icon">🎁</div>Gets free PDF</div>
+      <div class="vs-arrow">→</div>
+      <div class="vs"><div class="vs-icon">💳</div>Buys product</div>
+      <div class="vs-arrow">→</div>
+      <div class="vs"><div class="vs-icon">🤩</div>Loves it</div>
+      <div class="vs-arrow">→</div>
+      <div class="vs"><div class="vs-icon">💬</div>Shares in groups</div>
+      <div class="vs-arrow">→</div>
+      <div class="vs"><div class="vs-icon">💰</div>Earns ₹50 referral</div>
+      <div class="vs-arrow">→</div>
+      <div class="vs"><div class="vs-icon">🔄</div>Loop repeats</div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTION HANDLER -->
+<section class="section" style="border-top:1px solid var(--border)">
+  <div class="sec-badge">Sales Mastery</div>
+  <div class="sec-title">Handle Every Objection Instantly</div>
+  <div class="sec-sub">These are the 8 most common reasons people don't buy. Here's exactly what to say.</div>
+  <div class="obj-grid">
+    <div class="obj-card" onclick="toggleObj(this)">
+      <div class="obj-question"><span class="obj-q-text">Yeh kya kaam ka hai mere liye?"</span><span class="obj-arrow">↓</span></div>
+      <div class="obj-answer">Say: <strong>"Bhai, ek example batao — koi cheez online mangwai aur refund nahi mila? RefundWala Pro mein exact complaint letter milta hai jo company ko respond karna hi padta hai. ₹179 mein ek refund bhi milega toh 10x return."</strong> Always give a specific, relatable example before explaining features.</div>
+    </div>
+    <div class="obj-card" onclick="toggleObj(this)">
+      <div class="obj-question"><span class="obj-q-text">Bahut mehnga hai"</span><span class="obj-arrow">↓</span></div>
+      <div class="obj-answer">Say: <strong>"₹99 mein ek lawyer se ek sawaal bhi nahi pooch sakte. LexIndia Pro mein unlimited legal questions pooch sakte ho. Ek bar use karo — agar kaam ka nahi laga toh WhatsApp karo, hum dekhenge."</strong> Compare to the cost of NOT having it. Anchor to expensive alternatives.</div>
+    </div>
+    <div class="obj-card" onclick="toggleObj(this)">
+      <div class="obj-question"><span class="obj-q-text">Pehle dekhunga, phir sochta hoon"</span><span class="obj-arrow">↓</span></div>
+      <div class="obj-answer">Say: <strong>"Bilkul — isliye humne free cheatsheet banayi hai. Pehle yeh download karo: [link]. Agar helpful laga toh full version try karo. Aur aaj ka offer kal nahi milega — ₹99 ki jagah ₹149 ho jaayega."</strong> Give them the free thing AND create urgency.</div>
+    </div>
+    <div class="obj-card" onclick="toggleObj(this)">
+      <div class="obj-question"><span class="obj-q-text">Online payment se darta hoon"</span><span class="obj-arrow">↓</span></div>
+      <div class="obj-answer">Say: <strong>"Samajh sakta hoon. Instamojo India ki sabse trusted payment gateway hai — same jo Zomato, Swiggy ke vendors use karte hain. UPI se pay karo — 2 second mein hota hai aur bank account se directly jaata hai. WhatsApp pe bhi bata sakte ho agar koi issue ho."</strong></div>
+    </div>
+    <div class="obj-card" onclick="toggleObj(this)">
+      <div class="obj-question"><span class="obj-q-text">Kya guarantee hai kaam karega?"</span><span class="obj-arrow">↓</span></div>
+      <div class="obj-answer">Say: <strong>"Isiliye humara WhatsApp number diya hai — +91 74309 12146. Koi bhi problem ho, seedha message karo. Aur dekho — ₹149 mein risk hi kya hai? Ek lunch ke paise mein ek AI tool jo din bhar kaam aayega."</strong> Reduce perceived risk. Make the price feel trivial.</div>
+    </div>
+    <div class="obj-card" onclick="toggleObj(this)">
+      <div class="obj-question"><span class="obj-q-text">Mujhe AI tools nahi aate use karna"</span><span class="obj-arrow">↓</span></div>
+      <div class="obj-answer">Say: <strong>"Yahi toh khaas baat hai — koi technical knowledge chahiye hi nahi. WhatsApp jaisa simple hai. Apna sawaal type karo, jawab milta hai. Hum onboarding mein full support dete hain — purchase ke baad WhatsApp pe guide kar denge."</strong></div>
+    </div>
+    <div class="obj-card" onclick="toggleObj(this)">
+      <div class="obj-question"><span class="obj-q-text">Free mein kuch milega?"</span><span class="obj-arrow">↓</span></div>
+      <div class="obj-answer">Say: <strong>"Haan bilkul! Yeh lo abhi free mein: [Legal Rights Cheatsheet link]. 10 rights jo har Indian ko pata hone chahiye. Download karo — koi email bhi nahi maangte. Agar helpful laga toh full LexIndia Pro try karna."</strong> Always have a free thing ready. Never say no to this question.</div>
+    </div>
+    <div class="obj-card" onclick="toggleObj(this)">
+      <div class="obj-question"><span class="obj-q-text">Koi review nahi hai, trust kaise karoon?"</span><span class="obj-arrow">↓</span></div>
+      <div class="obj-answer">Say: <strong>"Fair point. Isiliye hum pehle free sample dete hain — try karo, phir decide karo. Aur hum Sahayak hain — Revati Traders ke naam se registered business. UPI ID: revatitraders48-2@okaxis. Naam, number, UPI — sab transparent hai."</strong> Transparency builds trust faster than reviews.</div>
+    </div>
+  </div>
+</section>
+
+</div><!-- end funnel tab -->
+
+<!-- ══════════════ TAB: CONTENT ══════════════ -->
+<div class="tab-content" id="tab-content">
+<section class="section">
+  <div class="sec-badge">Content Strategy</div>
+  <div class="sec-title">7-Day Content Calendar</div>
+  <div class="sec-sub">Post this exact content every week. Repeat with fresh examples. Consistency beats perfection.</div>
+  <div class="cal-grid">
+    <div class="cal-day">
+      <div class="cal-day-name">Mon</div>
+      <div class="cal-task">Consumer rights tip</div>
+      <div class="cal-tag tag-ig">Reel</div>
+      <div class="cal-tag tag-wa">WA</div>
+    </div>
+    <div class="cal-day">
+      <div class="cal-day-name">Tue</div>
+      <div class="cal-task">Legal myth vs fact</div>
+      <div class="cal-tag tag-qu">Quora</div>
+      <div class="cal-tag tag-ig">Story</div>
+    </div>
+    <div class="cal-day">
+      <div class="cal-day-name">Wed</div>
+      <div class="cal-task">Product demo / tool tip</div>
+      <div class="cal-tag tag-yt">Short</div>
+      <div class="cal-tag tag-em">Email</div>
+    </div>
+    <div class="cal-day">
+      <div class="cal-day-name">Thu</div>
+      <div class="cal-task">Success story / case</div>
+      <div class="cal-tag tag-wa">WA Bcast</div>
+      <div class="cal-tag tag-ig">Reel</div>
+    </div>
+    <div class="cal-day">
+      <div class="cal-day-name">Fri</div>
+      <div class="cal-task">Weekend offer / deal</div>
+      <div class="cal-tag tag-wa">WA</div>
+      <div class="cal-tag tag-em">Email</div>
+    </div>
+    <div class="cal-day">
+      <div class="cal-day-name">Sat</div>
+      <div class="cal-task">Mind-blowing fact</div>
+      <div class="cal-tag tag-ig">Reel</div>
+      <div class="cal-tag tag-yt">Short</div>
+    </div>
+    <div class="cal-day">
+      <div class="cal-day-name">Sun</div>
+      <div class="cal-task">Week recap + free PDF push</div>
+      <div class="cal-tag tag-wa">WA</div>
+      <div class="cal-tag tag-qu">Quora</div>
+    </div>
+  </div>
+
+  <!-- CONTENT IDEAS -->
+  <div class="sec-title" style="margin-top:40px">30 Ready-to-Post Content Ideas</div>
+  <div class="strat-grid">
+    <div class="strat-card orange">
+      <div class="strat-icon">⚖️</div>
+      <div class="strat-name">Legal Rights Series</div>
+      <div class="strat-desc">10 posts: "Did you know you can get a full refund if..." Each post ends with LexIndia Pro CTA.</div>
+      <div class="strat-result">→ LexIndia Pro sales</div>
+    </div>
+    <div class="strat-card green">
+      <div class="strat-icon">🛡️</div>
+      <div class="strat-name">Refund Victory Stories</div>
+      <div class="strat-desc">"How I got ₹5,000 refund from Flipkart in 3 days using one letter." Real or hypothetical case studies.</div>
+      <div class="strat-result">→ RefundWala Pro sales</div>
+    </div>
+    <div class="strat-card blue">
+      <div class="strat-icon">✍️</div>
+      <div class="strat-name">AI vs Human Content</div>
+      <div class="strat-desc">Show side-by-side: human-written caption vs DigiSeva Pro output. Same brief, better result, 10 seconds.</div>
+      <div class="strat-result">→ DigiSeva Pro sales</div>
+    </div>
+    <div class="strat-card pink">
+      <div class="strat-icon">🧠</div>
+      <div class="strat-name">Mind-Blowing Facts</div>
+      <div class="strat-desc">Your brain experiments content. "Your brain is lying to you" type posts get 10x organic shares.</div>
+      <div class="strat-result">→ Email list growth</div>
+    </div>
+    <div class="strat-card orange">
+      <div class="strat-icon">📚</div>
+      <div class="strat-name">JEE/NEET Tips</div>
+      <div class="strat-desc">"Top 5 shortcuts for Organic Chemistry" type content. Ends with "Full formula sheet: [link]"</div>
+      <div class="strat-result">→ JEE Bundle sales</div>
+    </div>
+    <div class="strat-card green">
+      <div class="strat-icon">💼</div>
+      <div class="strat-name">Job Hunt Hacks</div>
+      <div class="strat-desc">"Resume mistake 90% Indians make" — hooks job seekers into Secret Job Hunt Kit.</div>
+      <div class="strat-result">→ Job Kit sales</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════════ TAB: SCRIPTS ══════════════ -->
+<div class="tab-content" id="tab-scripts">
+<section class="section">
+  <div class="sec-badge">Ready-Made Scripts</div>
+  <div class="sec-title">Copy-Paste Sales Scripts</div>
+  <div class="sec-sub">Use these word-for-word. Tested for Indian WhatsApp and Instagram DM conversions.</div>
+
+  <div class="script-card">
+    <div class="script-label">💬 WhatsApp Group Launch Message</div>
+    <div class="script-body" id="s1">🚀 Sahayak ke saath miliye!
+
+Humne banaya hai India ka pehla affordable AI toolkit:
+
+⚖️ LexIndia Pro — Kanooni sawaal? Sirf ₹99
+🛡️ RefundWala Pro — Refund nahi mila? ₹179 mein solve
+✍️ DigiSeva Pro — Content chahiye? ₹149 mein ready
+📦 Complete Bundle — Sab ek saath — sirf ₹349
+
+✅ UPI payment
+✅ Instant delivery  
+✅ WhatsApp support
+
+👉 sahayak-pro.netlify.app
+
+Sawaal ho toh seedha WhatsApp karo 🙏</div>
+    <button class="copy-btn" onclick="copyScript('s1',this)">📋 Copy Message</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-label">💬 Cold DM — First Contact</div>
+    <div class="script-body" id="s2">Namaste! 🙏
+
+Aapka [consumer rights/legal/content] ke baare mein post dekha.
+
+Humne ek free Legal Rights Cheatsheet banaya hai — 10 rights jo har Indian ko pata hone chahiye.
+
+Kya main bhej sakta hoon? Bilkul free hai, koi catch nahi 😊
+
+— Mondala, Sahayak</div>
+    <button class="copy-btn" onclick="copyScript('s2',this)">📋 Copy Message</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-label">💬 Follow-Up After Free PDF</div>
+    <div class="script-body" id="s3">Namaste! PDF mila? 
+
+Ek sawaal — aapne kabhi online shopping mein cheating feel ki? Ya koi legal problem aayi jahan lawyer afford nahi ho saka?
+
+Agar haan, toh LexIndia Pro dekhiye — ₹99 mein unlimited AI legal research. 
+
+👉 imojo.in/1NsXXn3
+
+Koi sawaal ho toh batao — main khud jawab deta hoon 🙏</div>
+    <button class="copy-btn" onclick="copyScript('s3',this)">📋 Copy Message</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-label">💬 Scarcity / Urgency Close</div>
+    <div class="script-body" id="s4">⚡ Sirf aaj ke liye!
+
+Complete Bundle (₹427 ki value) — sirf ₹349
+
+Isme hai:
+→ DigiSeva Pro (₹149)
+→ RefundWala Pro (₹179)  
+→ LexIndia Pro (₹99)
+
+Kal price wapas normal ho jaayegi.
+
+👉 imojo.in/h2wVGR
+
+UPI se 2 second mein payment, instant access 🔥</div>
+    <button class="copy-btn" onclick="copyScript('s4',this)">📋 Copy Message</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-label">📸 Instagram Reel Caption — Legal</div>
+    <div class="script-body" id="s5">Yeh 3 cheezein Amazon/Flipkart NAHI bata sakti 👇
+
+1️⃣ Aapko 30 din mein refund ka FULL RIGHT hai
+2️⃣ Refusal pe Consumer Forum mein complaint kar sakte ho
+3️⃣ Company ko 5x penalty bhar ni pad sakti hai
+
+Isko save karo. Share karo. Kisi ka kaam aayega.
+
+Full rights guide free mein chahiye?
+Bio mein link hai 👆
+
+#ConsumerRights #India #LegalRights #Sahayak #RefundTips</div>
+    <button class="copy-btn" onclick="copyScript('s5',this)">📋 Copy Message</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-label">📝 Quora Answer Template</div>
+    <div class="script-body" id="s6">[Answer the question thoroughly in 300-400 words with real, helpful information]
+
+...
+
+Main yahan ek practical cheez add karna chahta hoon jo bahut logon ko pata nahi hoti:
+
+[Add 2-3 genuinely useful tips relevant to the question]
+
+Agar aapko is topic pe aur depth chahiye, humne ek free [Legal Rights / Consumer Guide] PDF banaya hai jo main share kar sakta hoon — comment mein batao ya profile mein link hai.
+
+(Note: Main Sahayak chalata hoon — India ke liye affordable AI legal aur consumer tools.)</div>
+    <button class="copy-btn" onclick="copyScript('s6',this)">📋 Copy Message</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-label">📧 Email — Welcome + Free PDF Delivery</div>
+    <div class="script-body" id="s7">Subject: Aapki Free Legal Rights Cheatsheet — aur ek baat 🙏
+
+Namaste [Name]!
+
+Aapki Legal Rights Cheatsheet yahan hai:
+👉 [PDF Link]
+
+Isme 10 rights hain jo har Indian ko pata hone chahiye — from RTI to refunds to police complaints.
+
+Ek personal baat:
+
+Maine Sahayak isliye banaya kyunki mere ek relative ko ek simple legal sawaal ke liye ₹5,000 ka lawyer ka bill dena pada.
+
+Woh sawaal ka jawab ₹99 mein diya ja sakta tha.
+
+Isiliye LexIndia Pro banaya — AI-powered Indian legal research, plain Hindi mein, ₹99 mein.
+
+Agar kabhi koi legal sawaal aaye — try karna:
+👉 imojo.in/1NsXXn3
+
+Koi bhi sawaal ho — seedha reply karo is email pe.
+
+Dhanyavaad 🙏
+Mondala
+Sahayak — Aapka Digital Sahayak
++91 74309 12146</div>
+    <button class="copy-btn" onclick="copyScript('s7',this)">📋 Copy Message</button>
+  </div>
+
+  <div class="script-card">
+    <div class="script-label">💬 Referral Program Announcement</div>
+    <div class="script-body" id="s8">🎉 Sahayak Referral Program — Ab aap bhi kamao!
+
+Simple hai:
+→ Apna referral link share karo
+→ Koi bhi kharide — aapko ₹50 milega
+→ Har purchase pe, unlimited times
+
+Kaise join karein?
+WhatsApp karo: +91 74309 12146
+Likhna: "Referral chahiye"
+
+Hum aapko personal link bhejenge.
+
+Agar aapke 10 dost bhi khareedein = ₹500 aapke paas 💰
+
+Share karo, aage badhao 🚀</div>
+    <button class="copy-btn" onclick="copyScript('s8',this)">📋 Copy Message</button>
+  </div>
+
+</section>
+</div>
+
+<!-- ══════════════ TAB: CALCULATOR ══════════════ -->
+<div class="tab-content" id="tab-calculator">
+<section class="section">
+  <div class="sec-badge">Revenue Calculator</div>
+  <div class="sec-title">Calculate Your Monthly Revenue</div>
+  <div class="sec-sub">Adjust the numbers below to see your projected monthly income from Sahayak.</div>
+
+  <div class="calc-wrap">
+    <div class="calc-title">📊 Sales Calculator</div>
+    <div class="calc-row">
+      <div class="calc-input-wrap">
+        <div class="calc-label">WhatsApp reach/day</div>
+        <input class="calc-input" id="c1" type="number" value="200" oninput="calcRevenue()"/>
+      </div>
+      <div class="calc-input-wrap">
+        <div class="calc-label">Click-through rate (%)</div>
+        <input class="calc-input" id="c2" type="number" value="15" oninput="calcRevenue()"/>
+      </div>
+    </div>
+    <div class="calc-row">
+      <div class="calc-input-wrap">
+        <div class="calc-label">Conversion rate (%)</div>
+        <input class="calc-input" id="c3" type="number" value="8" oninput="calcRevenue()"/>
+      </div>
+      <div class="calc-input-wrap">
+        <div class="calc-label">Avg. order value (₹)</div>
+        <input class="calc-input" id="c4" type="number" value="249" oninput="calcRevenue()"/>
+      </div>
+    </div>
+    <div class="calc-row">
+      <div class="calc-input-wrap">
+        <div class="calc-label">Email subscribers</div>
+        <input class="calc-input" id="c5" type="number" value="500" oninput="calcRevenue()"/>
+      </div>
+      <div class="calc-input-wrap">
+        <div class="calc-label">Email conversion (%)</div>
+        <input class="calc-input" id="c6" type="number" value="3" oninput="calcRevenue()"/>
+      </div>
+    </div>
+    <div class="calc-result">
+      <div class="cr-item"><div class="cr-num" id="r1">₹0</div><div class="cr-label">WhatsApp Sales/Month</div></div>
+      <div class="cr-item"><div class="cr-num" id="r2">₹0</div><div class="cr-label">Email Sales/Month</div></div>
+      <div class="cr-item"><div class="cr-num" id="r3">₹0</div><div class="cr-label">Total Revenue/Month</div></div>
+      <div class="cr-item"><div class="cr-num" id="r4">₹0</div><div class="cr-label">Annual Projection</div></div>
+    </div>
+  </div>
+
+  <!-- GROWTH MILESTONES -->
+  <div class="sec-title" style="margin-top:40px">Revenue Milestones</div>
+  <div class="strat-grid">
+    <div class="strat-card orange">
+      <div class="strat-icon">🌱</div>
+      <div class="strat-name">₹10,000/month</div>
+      <div class="strat-desc">50 sales/month at ₹200 avg. Achievable in 30 days with consistent WhatsApp sharing in 20+ groups.</div>
+      <div class="strat-result">→ 2 sales/day needed</div>
+    </div>
+    <div class="strat-card green">
+      <div class="strat-icon">🚀</div>
+      <div class="strat-name">₹50,000/month</div>
+      <div class="strat-desc">Email list of 2,000 + WhatsApp broadcast of 500 + 1 Reel/day. Month 2-3 target.</div>
+      <div class="strat-result">→ 10 sales/day needed</div>
+    </div>
+    <div class="strat-card blue">
+      <div class="strat-icon">💎</div>
+      <div class="strat-name">₹1,00,000/month</div>
+      <div class="strat-desc">Referral program active + email list 5,000 + YouTube Shorts gaining traction. Month 4-6.</div>
+      <div class="strat-result">→ 20 sales/day needed</div>
+    </div>
+    <div class="strat-card pink">
+      <div class="strat-icon">👑</div>
+      <div class="strat-name">₹5,00,000/month</div>
+      <div class="strat-desc">Subscription model + reseller network of 50 people + DealDekho affiliate income combined.</div>
+      <div class="strat-result">→ Systems, not hustle</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════════ TAB: 90-DAY PLAN ══════════════ -->
+<div class="tab-content" id="tab-plan">
+<section class="section">
+  <div class="sec-badge">Execution Blueprint</div>
+  <div class="sec-title">Your 90-Day Launch Plan</div>
+  <div class="sec-sub">Not theory. Exact daily actions that compound into serious income. Check each task as you complete it.</div>
+
+  <div class="plan-grid">
+    <div class="plan-card m1">
+      <div class="plan-month">Month 1 — Foundation</div>
+      <div class="plan-title">Build the machine</div>
+      <ul class="plan-tasks">
+        <li>Deploy sahayak-pro.netlify.app ✅</li>
+        <li>Set up Google Form email capture ✅</li>
+        <li>Join 50 WhatsApp groups (students, legal, business)</li>
+        <li>Create Instagram page @sahayak.india</li>
+        <li>Post 1 Reel every day — no exceptions</li>
+        <li>Answer 3 Quora questions daily</li>
+        <li>Send launch message to all groups</li>
+        <li>Get first 10 paying customers</li>
+        <li>Collect first 5 testimonials</li>
+        <li>Set up referral program via WhatsApp</li>
+      </ul>
+      <div class="plan-target">🎯 Target: ₹10,000 revenue</div>
+    </div>
+    <div class="plan-card m2">
+      <div class="plan-month">Month 2 — Scale</div>
+      <div class="plan-title">Pour fuel on the fire</div>
+      <ul class="plan-tasks">
+        <li>Email list: grow to 500 subscribers</li>
+        <li>Launch YouTube Shorts channel</li>
+        <li>Start weekly email newsletter</li>
+        <li>Create 3 new content series</li>
+        <li>Activate referral program formally</li>
+        <li>Run first WhatsApp flash sale</li>
+        <li>Add 2 new products to store</li>
+        <li>Reach 1,000 Instagram followers</li>
+        <li>Get featured in 3 WhatsApp communities</li>
+        <li>Launch DealDekho affiliate page</li>
+      </ul>
+      <div class="plan-target">🎯 Target: ₹35,000 revenue</div>
+    </div>
+    <div class="plan-card m3">
+      <div class="plan-month">Month 3 — Multiply</div>
+      <div class="plan-title">Let systems do the work</div>
+      <ul class="plan-tasks">
+        <li>Email list: grow to 2,000 subscribers</li>
+        <li>Launch ₹99/month subscription tier</li>
+        <li>Recruit 10 resellers at 30% commission</li>
+        <li>First YouTube Short hits 10K views</li>
+        <li>Amazon affiliate income starts flowing</li>
+        <li>Launch HindiSeva AI product</li>
+        <li>Create premium bundle at ₹999</li>
+        <li>Run paid WhatsApp campaign</li>
+        <li>Apply to Flipkart affiliate program</li>
+        <li>Reinvest 30% revenue into growth</li>
+      </ul>
+      <div class="plan-target">🎯 Target: ₹1,00,000 revenue</div>
+    </div>
+  </div>
+
+  <!-- DAILY CHECKLIST -->
+  <div class="sec-title" style="margin-top:48px">Daily Non-Negotiables</div>
+  <div class="sec-sub">Do these 7 things every single day. No days off in Month 1.</div>
+  <div class="checklist" id="dailyChecklist">
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div><div class="check-text">Share Sahayak link in 3 WhatsApp groups</div><div class="check-sub">Value post first, link at end. Never spam.</div></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div><div class="check-text">Post 1 Instagram Reel or Story</div><div class="check-sub">Legal tip, AI demo, or mind-blowing fact.</div></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div><div class="check-text">Answer 1 Quora question</div><div class="check-sub">Consumer rights, legal advice, JEE prep, job hunting.</div></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div><div class="check-text">Follow up with 3 people who showed interest</div><div class="check-sub">Check yesterday's DMs. One follow-up = one sale.</div></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div><div class="check-text">Check Google Form responses</div><div class="check-sub">New email signups = warm leads. Message them today.</div></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div><div class="check-text">Send free PDF to anyone who asked</div><div class="check-sub">Never delay on free stuff. Speed builds trust.</div></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-tick">✓</span></div>
+      <div><div class="check-text">Record today's revenue in notebook</div><div class="check-sub">What gets measured gets managed. Track every rupee.</div></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<footer>
+  <div class="footer-logo">Sahayak <b>Growth System</b></div>
+  <p>Built for Mondala — Revati Traders · sahayak-pro.netlify.app · +91 74309 12146</p>
+  <p style="margin-top:6px">© 2026 Sahayak — आपका डिजिटल सहायक</p>
+</footer>
+
+<script>
+// ── TABS ──
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top:80,behavior:'smooth'});
+}
+
+// ── OBJECTIONS ──
+function toggleObj(card) {
+  const answer = card.querySelector('.obj-answer');
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.obj-card').forEach(c=>{c.classList.remove('open');c.querySelector('.obj-answer').classList.remove('open');});
+  if(!isOpen){card.classList.add('open');answer.classList.add('open');}
+}
+
+// ── COPY SCRIPTS ──
+function copyScript(id,btn) {
+  const text = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.textContent='✅ Copied!';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='📋 Copy Message';btn.classList.remove('copied');},2500);
+  });
+}
+
+// ── REVENUE CALCULATOR ──
+function calcRevenue() {
+  const reach = parseFloat(document.getElementById('c1').value)||0;
+  const ctr = parseFloat(document.getElementById('c2').value)||0;
+  const conv = parseFloat(document.getElementById('c3').value)||0;
+  const aov = parseFloat(document.getElementById('c4').value)||0;
+  const subs = parseFloat(document.getElementById('c5').value)||0;
+  const econv = parseFloat(document.getElementById('c6').value)||0;
+
+  const waSales = Math.round(reach * (ctr/100) * (conv/100) * 30 * aov);
+  const emSales = Math.round(subs * (econv/100) * aov);
+  const total = waSales + emSales;
+  const annual = total * 12;
+
+  const fmt = n => '₹'+n.toLocaleString('en-IN');
+  document.getElementById('r1').textContent = fmt(waSales);
+  document.getElementById('r2').textContent = fmt(emSales);
+  document.getElementById('r3').textContent = fmt(total);
+  document.getElementById('r4').textContent = fmt(annual);
+}
+calcRevenue();
+
+// ── CHECKLIST ──
+function toggleCheck(item) {
+  item.classList.toggle('done');
+  const done = document.querySelectorAll('.check-item.done').length;
+  const total = document.querySelectorAll('.check-item').length;
+  if(done===total) {
+    setTimeout(()=>alert('🎉 Kal ke liye ek aur din complete! Consistency hi wealth hai.'),200);
+  }
+}
+</script>
+</body>
+</html>

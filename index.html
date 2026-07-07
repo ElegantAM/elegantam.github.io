@@ -16,7 +16,8 @@
             const input = document.getElementById('problem').value;
             const output = document.getElementById('result');
             
-            if (!input) {
+            // Logic Fixed: Only proceeds if input has text
+            if (!input.trim()) {
                 alert("Please enter an issue to analyze.");
                 return;
             }
@@ -45,4 +46,5 @@
     </script>
 </body>
 </html>
+
 
